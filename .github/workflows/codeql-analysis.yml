@@ -2,16 +2,14 @@ name: "CodeQL Analysis"
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   analyze:
+    name: Analyze code with CodeQL
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,13 +17,5 @@ jobs:
       - name: Set up CodeQL
         uses: github/codeql-action/setup-codeql@v2
 
-      - name: Initialize CodeQL
-        run: |
-          git clone https://github.com/github/codeql
-          cd codeql
-          ./setup.sh
-
       - name: Analyze code with CodeQL
         uses: github/codeql-action/analyze@v2
-        with:
-          category: "security"
